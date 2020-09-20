@@ -1,0 +1,20 @@
+info:
+  stage: test
+  tags:
+    - ubuntu
+    - docker
+  image: golang:1.15.2-buster
+  script:
+    - CGO_ENABLED=0 go build -ldflags="-s"   
+    - |
+      # dump this gitlab ci job jwt parts (header, payload, signature)
+      # the job output.
+      # NB never do this is a real job because the jwt should remain
+      #    private (its a secret credential).
+      echo $CI_JOB_JWT | tr '.' '\n'
+    - |
+      # validate this gitlab ci job jwt that is in the
+      # CI_JOB_JWT environment variable against the
+      # gitlab jwks endpoint at $CI_SERVER_URL/-/jwks.
+      SSL_CERT_FILE=$CI_SERVER_TLS_CA_FILE \
+        ./gitlab-ci-validate-jwt
