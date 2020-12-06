@@ -46,8 +46,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to parse JWK from %s: %v", jwksURL, err)
 	}
-	if keySet.Len() != 1 {
-		log.Fatalf("can only handle a single key from %s but it returned %d keys", jwksURL, keySet.Len())
+	if keySet.Len() < 1 {
+		log.Fatalf("%s did not return any key", jwksURL)
 	}
 
 	// parse and validate the job jwt against the gitlab jwt key set.
