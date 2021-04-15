@@ -3,7 +3,7 @@ info:
   tags:
     - ubuntu
     - docker
-  image: golang:1.15.6-buster
+  image: golang:1.16.3-buster
   script:
     - CGO_ENABLED=0 go build -ldflags="-s"   
     - |

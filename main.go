@@ -1,14 +1,14 @@
 package main
 
 import (
-	"crypto/rsa"
+	"context"
 	"fmt"
 	"log"
 	"os"
 	"sort"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/lestrrat-go/jwx/jwk"
+	"github.com/lestrrat-go/jwx/jwt"
 )
 
 func getEnv(name string) string {
@@ -42,7 +42,7 @@ func main() {
 	// 			]
 	// 		}
 	log.Printf("Getting the GitLab JWT public key set from the jwks endpoint at %s...", jwksURL)
-	keySet, err := jwk.FetchHTTP(jwksURL)
+	keySet, err := jwk.Fetch(context.Background(), jwksURL)
 	if err != nil {
 		log.Fatalf("failed to parse JWK from %s: %v", jwksURL, err)
 	}
@@ -99,41 +99,11 @@ func main() {
 	//   				base64UrlEncode(header) + "." + base64UrlEncode(payload),
 	//					gitLabJwtKeySet.getKey(header.kid))
 	log.Println("Validating GitLab CI job JWT...")
-	token, err := jwt.Parse(ciJobJWT, func(token *jwt.Token) (interface{}, error) {
-		claims := token.Claims.(jwt.MapClaims)
-
-		iss := claims["iss"].(string)
-		if iss != boundIssuer {
-			return nil, fmt.Errorf("unexpected jwt iss: %s", iss)
-		}
-
-		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
-			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
-		}
-
-		kid := token.Header["kid"].(string)
-		keys := keySet.LookupKeyID(kid)
-		if len(keys) == 0 {
-			return nil, fmt.Errorf("unknown jwt kid: %s", kid)
-		}
-		if len(keys) != 1 {
-			return nil, fmt.Errorf("key set returned more than one key for the jwt kid: %s", kid)
-		}
-		key := keys[0]
-
-		publicKey := &rsa.PublicKey{}
-		err := key.Raw(publicKey)
-		if err != nil {
-			return nil, fmt.Errorf("failed to create the public key: %v", err)
-		}
-
-		return publicKey, nil
-	})
+	token, err := jwt.ParseString(ciJobJWT, jwt.WithIssuer(boundIssuer), jwt.WithKeySet(keySet))
 	if err != nil {
 		log.Fatalf("failed to validate the jwt: %v", err)
 	}
-
-	claims := token.Claims.(jwt.MapClaims)
+	claims := token.PrivateClaims()
 
 	log.Printf("jwt is valid for project %s", claims["project_path"])
 
