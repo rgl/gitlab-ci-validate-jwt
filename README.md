@@ -64,8 +64,8 @@ To see how all of this can be done read the [main.go](main.go) file.
 ## Reference
 
 * https://docs.gitlab.com/ce/ci/examples/authenticating-with-hashicorp-vault/
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v13.10.3/app/models/ci/build.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v13.10.3/lib/gitlab/ci/jwt.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v13.10.3/app/controllers/jwt_controller.rb
-* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/-/jwks) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v13.10.3/config/routes.rb#L202-204
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.0.2/app/models/ci/build.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.0.2/lib/gitlab/ci/jwt.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.0.2/app/controllers/jwt_controller.rb
+* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/-/jwks) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.0.2/config/routes.rb#L225-227
 * https://www.vaultproject.io/docs/auth/jwt
