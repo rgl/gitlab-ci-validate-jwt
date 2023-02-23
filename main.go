@@ -34,9 +34,9 @@ func main() {
 	// 			"keys": [
 	// 				{
 	// 					"kty": "RSA",
-	// 					"kid": "_2nr4525S5ArP0KNXCLrH6p0n3auC_DYqPIuO37h3NA",
+	// 					"kid": "0uVtdPL846RW_BcI0YLO7Bjtipzyu5Z84vtCHybBRdY",
 	// 					"e": "AQAB",
-	// 					"n": "rYyQl7zEPEQPpxbhZpVkxFD-rEZHtyXnsr203AbgY1ks-8E3FuYCmFIZ7GrExlQjbhQkvEF7jdBHgALkb2Gu_p1DiBuWlTMSCXIbXzUjlh6_ULM05MUCXBYmrSaxRsgM6JH5T9awEHp9C48Sow9ZD5f9DcSIWptcjC8sPyxalje3xcPCrY4wzijUHisDNjjVqC7xSdhksdw_EByDcRWZ35vycm4FQnMXya745kwOFRKlpOXYvQJqXB1edONWZ3LbfuweAauNZfInWUjQiXSAUWEV3OqdANY8MnGAYn9ajT9O8k86DX14Qk4ZBR5m4A0y_cd-AKSHeC41NU45Tg70H2zvdx-L9R0Nc4HPpbBk-ELiKKDMpYkxRhnN9jsrv2bF66obMhtPd_jmRevAPJlWgNN60lhFZEK_Zck_xx1UYPMEyL5lh3hg2-UOuhG02ryfHYk1wQMAfJTQXH6ZTo5Kf-6ky9XG3XNRG2-VztBD4Xuo-KDMxPApT2J2QQ60fHlfRH5AVLE94NIl1vCu_rm6Vui3Ag94uWsFj27PQmf3UK5SJ-GwE8IvGgZtxNloGHkSVm5UjHW0dl4kJlnFZ-itxdNkDey_cUeT10JoswYwwQNKLpjKlplCgMC5VvQ_ddtSob4FeKpO71EZZZpwqgVIacs8M-5IiJ8JXcS9VeKE0Wk",
+	// 					"n": "pydg59G3UOL2XX84st0hyDV7jPPG6zpikbFCP0Vwkj635LCVYx9tRTHE6BX0mu4QfPzDoj3qVp_2pjqUMuY3oaL0yIX1mI8stF6vljYU9kK1XjvM3Bxto-HqJx0RDFmg5bknLwwb6hhVz0Kh0-Hg1QLswv_Kop4a5jqNANnTQ1BhzNKIBztrYUHccfjpoWlD8P8Uu_7LU-Ka1OK5G5_wAA3vTgaTa-8R4aUhLISlinvAxPLfPoJ3pzYeplr_tPZwQNypN9IQQ0sJwRhYo2fXSldsPzsO1EmQXl7KihO9nc6Tq22ulb_YTtiUuC8BbiFKXyaVOTUvPiV4xdBvBNBHQQ",
 	// 					"use": "sig",
 	// 					"alg": "RS256"
 	// 				}
@@ -55,7 +55,7 @@ func main() {
 	//
 	// a job jwt is a private string alike:
 	//
-	// 		eyJhbGciOiJSUzI1NiIsImtpZCI6Il8ybnI0NTI1UzVBclAwS05YQ0xySDZwMG4zYXVDX0RZcVBJdU8zN2gzTkEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lc3BhY2VfaWQiOiIxMCIsIm5hbWVzcGFjZV9wYXRoIjoiZXhhbXBsZSIsInByb2plY3RfaWQiOiI3IiwicHJvamVjdF9wYXRoIjoiZXhhbXBsZS9naXRsYWItY2ktdmFsaWRhdGUtand0IiwidXNlcl9pZCI6IjEiLCJ1c2VyX2xvZ2luIjoicm9vdCIsInVzZXJfZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBpcGVsaW5lX2lkIjoiMTIiLCJqb2JfaWQiOiIyMyIsInJlZiI6Im1hc3RlciIsInJlZl90eXBlIjoiYnJhbmNoIiwicmVmX3Byb3RlY3RlZCI6InRydWUiLCJqdGkiOiJlY2I3YjJhOS02ZTljLTQ4NmUtYmYxNC1mNjIyOTgyOTMwODAiLCJpc3MiOiJnaXRsYWIuZXhhbXBsZS5jb20iLCJpYXQiOjE2MDA1OTExMjgsIm5iZiI6MTYwMDU5MTEyMywiZXhwIjoxNjAwNTk0NzI4LCJzdWIiOiJqb2JfMjMifQ.O_5PjdarFNJQ1u8Xh17BoWdsrxHtmeKu8_GJHJVuFRG3PE66hDTC0cOrqCP4iGp5InygIp26DE-C-fJ1QzgAiCkROQY83vLCq3_aTDVozCpuKdvifg7rxM5kd9ZmccmLnRrSnMPFF3LZPxvwn8A50ajJJOEbdD1Cud_lJd5ViVYZRPaATy44gPTFC72yqBIFwsrl5cB5Tlir_iMQyY4iMNYj-OWHG--hMVovUVVr9lFmhU8CmcaWjEd7C9gngp7hQ-BqMTWqhnCUUcipy7hNeHEACTrYjARuJEKAUMQf_23p1WO_ELHBNGrKSrKDFWtY_VOuGi7nmNVXU-Af0HCPzeYcoDwX1ex6E8ucrH5cgwj0exOIknBrcROWrxd6OFGQLo7V0hwRJ5P6auZJr5lG_hc0n2Ijc-sr266LRBzgwrqcVD9pcgfr6hW1wuyt9fyuNDvnXSkNQFT4v_CjhByUHm13CNRm7WW2urVUSL_suKR5yjV1k1AAzHo3-x1SeH4e9J8RkWiAtRGkU3imPtaADR3FpHCSzkncp-DC4iRTtGIKVLLuaLNZqKQWtfbTT8bfP0PxV109sb404t7U_gXZ5cqgi8Jam0FoYUyO_qEuBwwQdyHsj1YvYFCBLIFz3Zcu7gfUgEjGHCcFyrr9SArlj5YUWMmnbns77B0mwvl0Y4M
+	// 		eyJhbGciOiJSUzI1NiIsImtpZCI6IjB1VnRkUEw4NDZSV19CY0kwWUxPN0JqdGlwenl1NVo4NHZ0Q0h5YkJSZFkiLCJ0eXAiOiJKV1QifQ.eyJuYW1lc3BhY2VfaWQiOiIxMiIsIm5hbWVzcGFjZV9wYXRoIjoiZXhhbXBsZSIsInByb2plY3RfaWQiOiIyIiwicHJvamVjdF9wYXRoIjoiZXhhbXBsZS9naXRsYWItY2ktdmFsaWRhdGUtand0IiwidXNlcl9pZCI6IjEiLCJ1c2VyX2xvZ2luIjoicm9vdCIsInVzZXJfZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBpcGVsaW5lX2lkIjoiMjIiLCJwaXBlbGluZV9zb3VyY2UiOiJwdXNoIiwiam9iX2lkIjoiMjkiLCJyZWYiOiJtYXN0ZXIiLCJyZWZfdHlwZSI6ImJyYW5jaCIsInJlZl9wcm90ZWN0ZWQiOiJ0cnVlIiwianRpIjoiNDZiMDRiOWItYThmMS00MzFmLTg4MjYtYzY5MTdjYTY3NzFmIiwiaXNzIjoiaHR0cHM6Ly9naXRsYWIuZXhhbXBsZS5jb20iLCJpYXQiOjE2NzcxODg1NDcsIm5iZiI6MTY3NzE4ODU0MiwiZXhwIjoxNjc3MTkyMTQ3LCJzdWIiOiJwcm9qZWN0X3BhdGg6ZXhhbXBsZS9naXRsYWItY2ktdmFsaWRhdGUtand0OnJlZl90eXBlOmJyYW5jaDpyZWY6bWFzdGVyIiwiYXVkIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSJ9.M8RHBwvP5rVIJPEpztt4RKhgDLJJKiLP0O9XbBYvN5Fzt0zl-eNaoekTGbAAaZZK39jU3eZ-bkm8eKX8jdpYMz4di6WNGmVtJk_szDttXQpZ-HRYcNZz1EO83wuvPw0a9-ti9tfqgFy-xBc8jDVJhlS4bbRexrMbkwWiEWdHkApjopY9lnws61dl-OZ2-iPueIclzsQNEFSF1W9Us0lRi6OPp_dgSMPBVH6S3lqX-2p9V3FVlsW9aKqJr7_UuL1-F9dN-QCTztBra5A8GQeqIIVNalIhR8JDlon9vNyTFto34-elGmLfnk4jDkSbInQA7MKlN2to2vx18dkXWf3-DA
 	//
 	// and decoded as a private object is alike:
 	//
@@ -63,11 +63,11 @@ func main() {
 	//
 	// 			{
 	// 				"alg": "RS256",
-	// 				"kid": "_2nr4525S5ArP0KNXCLrH6p0n3auC_DYqPIuO37h3NA",
+	// 				"kid": "0uVtdPL846RW_BcI0YLO7Bjtipzyu5Z84vtCHybBRdY",
 	// 				"typ": "JWT"
 	// 			}
 	//
-	//		payload:
+	// 		payload:
 	//
 	// 			{
 	// 				"namespace_id": "10",
@@ -78,17 +78,19 @@ func main() {
 	// 				"user_login": "root",
 	// 				"user_email": "admin@example.com",
 	// 				"pipeline_id": "12",
+	// 				"pipeline_source": "push",
 	// 				"job_id": "23",
 	// 				"ref": "master",
 	// 				"ref_type": "branch",
 	// 				"ref_protected": "true",
-	// 				"jti": "ecb7b2a9-6e9c-486e-bf14-f62298293080",
-	// 				"iss": "gitlab.example.com",
-	// 				"iat": 1600591128,
-	// 				"nbf": 1600591123,
-	// 				"exp": 1600594728,
-	// 				"sub": "job_23"
-	// 			}
+	// 				"jti": "46b04b9b-a8f1-431f-8826-c6917ca6771f",
+	// 				"iss": "https://gitlab.example.com",
+	// 				"iat": 1677188547,
+	// 				"nbf": 1677188542,
+	// 				"exp": 1677192147,
+	// 				"sub": "project_path:example/gitlab-ci-validate-jwt:ref_type:branch:ref:master",
+	// 				"aud": "https://example.com"
+	//  		}
 	//
 	//		signature:
 	//
