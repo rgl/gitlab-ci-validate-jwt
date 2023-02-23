@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/lestrrat-go/jwx/jwk"
 	"github.com/lestrrat-go/jwx/jwt"
@@ -103,18 +104,25 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to validate the jwt: %v", err)
 	}
-	claims := token.PrivateClaims()
+	privateClaims := token.PrivateClaims()
 
-	log.Printf("jwt is valid for project %s", claims["project_path"])
+	log.Printf("jwt is valid for project %s", privateClaims["project_path"])
 
 	// dump the jwt claims (sorted by claim name).
-	keys := make([]string, 0, len(claims))
-	for k := range claims {
-		keys = append(keys, k)
+	claims := make([]string, 0, len(privateClaims)+7)
+	claims = append(claims,
+		fmt.Sprintf("jti=%s", token.JwtID()),
+		fmt.Sprintf("iss=%s", token.Issuer()),
+		fmt.Sprintf("iat=%s", token.IssuedAt().Format("2006-01-02T15:04:05-0700")),
+		fmt.Sprintf("nbf=%s", token.NotBefore().Format("2006-01-02T15:04:05-0700")),
+		fmt.Sprintf("exp=%s", token.Expiration().Format("2006-01-02T15:04:05-0700")),
+		fmt.Sprintf("sub=%s", token.Subject()),
+		fmt.Sprintf("aud=%s", strings.Join(token.Audience(), ",")))
+	for k := range privateClaims {
+		claims = append(claims, fmt.Sprintf("%s=%s", k, privateClaims[k]))
 	}
-	sort.Strings(keys)
-	for _, k := range keys {
-		v := claims[k]
-		log.Printf("jwt claim: %s=%v", k, v)
+	sort.Strings(claims)
+	for _, claim := range claims {
+		log.Printf("jwt claim: %s", claim)
 	}
 }
