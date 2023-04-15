@@ -71,5 +71,5 @@ To see how all of this can be done read the [main.go](main.go) file.
 * https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.9.0/app/models/ci/build.rb
 * https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.9.0/lib/gitlab/ci/jwt.rb
 * https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.9.0/app/controllers/jwt_controller.rb
-* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/-/jwks) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.9.0/config/routes.rb#L234-236
+* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/-/jwks) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.9.0/config/routes.rb#L213-215
 * https://www.vaultproject.io/docs/auth/jwt
