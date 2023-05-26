@@ -21,7 +21,10 @@ func getEnv(name string) string {
 }
 
 func main() {
-	ciJobJWT := getEnv("CI_JOB_JWT")
+	if len(os.Args) != 2 {
+		log.Fatalf("you must pass the gitlab ci job id token environment variable name as the single command line argument")
+	}
+	ciJobJWT := getEnv(os.Args[1])
 	ciServerURL := getEnv("CI_SERVER_URL")
 	jwksURL := fmt.Sprintf("%s/-/jwks", ciServerURL)
 	boundIssuer := getEnv("CI_SERVER_HOST")
@@ -51,7 +54,7 @@ func main() {
 		log.Fatalf("%s did not return any key", jwksURL)
 	}
 
-	// parse and validate the job jwt against the gitlab jwt key set.
+	// parse and validate the job id token jwt against the gitlab jwt key set.
 	//
 	// a job jwt is a private string alike:
 	//
@@ -121,7 +124,7 @@ func main() {
 		fmt.Sprintf("sub=%s", token.Subject()),
 		fmt.Sprintf("aud=%s", strings.Join(token.Audience(), ",")))
 	for k := range privateClaims {
-		claims = append(claims, fmt.Sprintf("%s=%s", k, privateClaims[k]))
+		claims = append(claims, fmt.Sprintf("%s=%v", k, privateClaims[k]))
 	}
 	sort.Strings(claims)
 	for _, claim := range claims {

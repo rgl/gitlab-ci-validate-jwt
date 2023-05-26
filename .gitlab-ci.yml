@@ -11,29 +11,16 @@ info:
     # build.
     - |
       CGO_ENABLED=0 \
-        go build -ldflags="-s"   
-    # dump the default gitlab ci job jwt parts (header, payload, signature)
-    # the job output.
-    # NB never do this is a real job because the jwt should remain
-    #    private (its a secret credential).
-    - |
-      echo $CI_JOB_JWT | tr '.' '\n'
-    # validate the default gitlab ci job jwt that is in the
-    # CI_JOB_JWT environment variable against the
-    # gitlab jwks endpoint at $CI_SERVER_URL/-/jwks.
-    - |
-      SSL_CERT_FILE=$CI_SERVER_TLS_CA_FILE \
-        ./gitlab-ci-validate-jwt
-    # dump the example gitlab ci job jwt parts (header, payload, signature)
-    # the job output.
+        go build -ldflags="-s"
+    # dump the example gitlab ci job id token jwt parts (header, payload,
+    # signature) to the job output.
     # NB never do this is a real job because the jwt should remain
     #    private (its a secret credential).
     - |
       echo $EXAMPLE_ID_TOKEN | tr '.' '\n'
-    # validate the example gitlab ci job jwt that is in the
+    # validate the example gitlab ci job id token jwt that is in the
     # EXAMPLE_ID_TOKEN environment variable against the
     # gitlab jwks endpoint at $CI_SERVER_URL/-/jwks.
     - |
       SSL_CERT_FILE=$CI_SERVER_TLS_CA_FILE \
-      CI_JOB_JWT=$EXAMPLE_ID_TOKEN \
-        ./gitlab-ci-validate-jwt
+        ./gitlab-ci-validate-jwt EXAMPLE_ID_TOKEN

@@ -1,15 +1,22 @@
-This validates a GitLab CI JWT using the keys available at its jwks endpoint.
+This validates a GitLab CI ID Token JWT using the keys available at its jwks endpoint.
 
-A GitLab CI JWT is a private string that can be used to authenticate a particular CI job in 3rd party services (like HashiCorp Vault).
+A GitLab CI ID Token JWT is a private string that can be used to authenticate a particular CI job in 3rd party services (like HashiCorp Vault).
 
-Its available in a CI job as the `CI_JOB_JWT` environment variable.
+Its available in a CI job as a [custom environment variable defined in the job `id_tokens` property](https://docs.gitlab.com/ee/ci/secrets/id_token_authentication.html), as, e.g.:
 
-It can also be available [as a custom ID token environment variable, with a custom `aud` claim](https://docs.gitlab.com/ee/ci/secrets/id_token_authentication.html).
+```yaml
+example_job:
+  id_tokens:
+    EXAMPLE_ID_TOKEN:
+      aud: https://example.com
+  script:
+    - echo $EXAMPLE_ID_TOKEN
+```
 
 A JWT is a structured string separated by dot characters; for example, a custom ID token JWT, something alike:
 
 ```
-eyJhbGciOiJSUzI1NiIsImtpZCI6IjB1VnRkUEw4NDZSV19CY0kwWUxPN0JqdGlwenl1NVo4NHZ0Q0h5YkJSZFkiLCJ0eXAiOiJKV1QifQ.eyJuYW1lc3BhY2VfaWQiOiIxMiIsIm5hbWVzcGFjZV9wYXRoIjoiZXhhbXBsZSIsInByb2plY3RfaWQiOiIyIiwicHJvamVjdF9wYXRoIjoiZXhhbXBsZS9naXRsYWItY2ktdmFsaWRhdGUtand0IiwidXNlcl9pZCI6IjEiLCJ1c2VyX2xvZ2luIjoicm9vdCIsInVzZXJfZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBpcGVsaW5lX2lkIjoiMjIiLCJwaXBlbGluZV9zb3VyY2UiOiJwdXNoIiwiam9iX2lkIjoiMjkiLCJyZWYiOiJtYXN0ZXIiLCJyZWZfdHlwZSI6ImJyYW5jaCIsInJlZl9wcm90ZWN0ZWQiOiJ0cnVlIiwianRpIjoiNDZiMDRiOWItYThmMS00MzFmLTg4MjYtYzY5MTdjYTY3NzFmIiwiaXNzIjoiaHR0cHM6Ly9naXRsYWIuZXhhbXBsZS5jb20iLCJpYXQiOjE2NzcxODg1NDcsIm5iZiI6MTY3NzE4ODU0MiwiZXhwIjoxNjc3MTkyMTQ3LCJzdWIiOiJwcm9qZWN0X3BhdGg6ZXhhbXBsZS9naXRsYWItY2ktdmFsaWRhdGUtand0OnJlZl90eXBlOmJyYW5jaDpyZWY6bWFzdGVyIiwiYXVkIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSJ9.M8RHBwvP5rVIJPEpztt4RKhgDLJJKiLP0O9XbBYvN5Fzt0zl-eNaoekTGbAAaZZK39jU3eZ-bkm8eKX8jdpYMz4di6WNGmVtJk_szDttXQpZ-HRYcNZz1EO83wuvPw0a9-ti9tfqgFy-xBc8jDVJhlS4bbRexrMbkwWiEWdHkApjopY9lnws61dl-OZ2-iPueIclzsQNEFSF1W9Us0lRi6OPp_dgSMPBVH6S3lqX-2p9V3FVlsW9aKqJr7_UuL1-F9dN-QCTztBra5A8GQeqIIVNalIhR8JDlon9vNyTFto34-elGmLfnk4jDkSbInQA7MKlN2to2vx18dkXWf3-DA
+eyJraWQiOiJwTG9jeVlFWHBqX2FrQzNVcnRQNkNfMUpGMEpvU1Q3VFZwazdwQXZqdWJ3IiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJuYW1lc3BhY2VfaWQiOiIxMCIsIm5hbWVzcGFjZV9wYXRoIjoiZXhhbXBsZSIsInByb2plY3RfaWQiOiIxIiwicHJvamVjdF9wYXRoIjoiZXhhbXBsZS9naXRsYWItY2ktdmFsaWRhdGUtand0IiwidXNlcl9pZCI6IjEiLCJ1c2VyX2xvZ2luIjoicm9vdCIsInVzZXJfZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBpcGVsaW5lX2lkIjoiMTgiLCJwaXBlbGluZV9zb3VyY2UiOiJwdXNoIiwiam9iX2lkIjoiMjkiLCJyZWYiOiJtYXN0ZXIiLCJyZWZfdHlwZSI6ImJyYW5jaCIsInJlZl9wYXRoIjoicmVmcy9oZWFkcy9tYXN0ZXIiLCJyZWZfcHJvdGVjdGVkIjoiZmFsc2UiLCJydW5uZXJfaWQiOjIsInJ1bm5lcl9lbnZpcm9ubWVudCI6InNlbGYtaG9zdGVkIiwic2hhIjoiZTNlMTM5NjBiNmMwMGNiMGIxZjI1NmI0OGQyOGE4OTY4MGQ4YjY2MCIsImp0aSI6ImMxMjYzYTJlLWIwMWItNDdmMy05MDdhLTE5ZTM5YmFkY2RmNiIsImlzcyI6Imh0dHBzOi8vZ2l0bGFiLmV4YW1wbGUuY29tIiwiaWF0IjoxNjg1MTI2Mzc0LCJuYmYiOjE2ODUxMjYzNjksImV4cCI6MTY4NTEyOTk3NCwic3ViIjoicHJvamVjdF9wYXRoOmV4YW1wbGUvZ2l0bGFiLWNpLXZhbGlkYXRlLWp3dDpyZWZfdHlwZTpicmFuY2g6cmVmOm1hc3RlciIsImF1ZCI6Imh0dHBzOi8vZXhhbXBsZS5jb20ifQ.MIJYPNidvTRLtl-jQDkgfJjeIJCr6gQHNcAFR0AA6ACBIbVRcZQ8xQIRT6JtDKvfKSZej4wx5PqDG73x80swgS7raAZpG4LdTWAhfkYtsi88TH050Zz7Ku3qdL-0KYp5ykdQoLPTm-JvkzTKYYmOs9VkUX-rcmpb-9Bqhp_o10cGYmflnq1wzxW7OXYrqmUA1lhZe8jFuhmULgoNwFWCa4Q7jEJmtqy6U5uo2PXJr5LeZB3umnk9062_KOft63JNkDvhpc7ZLXsk0gxaJVx4f5s04EC2T7yLZi_SP2n-Fle0XM1S1DIbO6d-agvn6KLyE95eLBjAMm-GR5zMrgWmhA
 ```
 
 When split by dot and decoded it has a header, payload and signature.
@@ -18,9 +25,9 @@ In this case, the header is:
 
 ```json
 {
+    "typ": "JWT",
     "alg": "RS256",
-    "kid": "0uVtdPL846RW_BcI0YLO7Bjtipzyu5Z84vtCHybBRdY",
-    "typ": "JWT"
+    "kid": "pLocyYEXpj_akC3UrtP6C_1JF0JoST7TVpk7pAvjubw"
 }
 ```
 
@@ -40,12 +47,16 @@ The payload is:
     "job_id": "23",
     "ref": "master",
     "ref_type": "branch",
+    "ref_path": "refs/heads/master",
     "ref_protected": "true",
-    "jti": "46b04b9b-a8f1-431f-8826-c6917ca6771f",
+    "runner_id": 2,
+    "runner_environment": "self-hosted",
+    "sha": "e3e13960b6c00cb0b1f256b48d28a89680d8b660",
+    "jti": "c1263a2e-b01b-47f3-907a-19e39badcdf6",
     "iss": "https://gitlab.example.com",
-    "iat": 1677188547,
-    "nbf": 1677188542,
-    "exp": 1677192147,
+    "iat": 1685126374,
+    "nbf": 1685126369,
+    "exp": 1685129974,
     "sub": "project_path:example/gitlab-ci-validate-jwt:ref_type:branch:ref:master",
     "aud": "https://example.com"
 }
@@ -68,7 +79,7 @@ To see how all of this can be done read the [main.go](main.go) file.
 ## Reference
 
 * https://docs.gitlab.com/ce/ci/examples/authenticating-with-hashicorp-vault/
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.10.3/app/models/ci/build.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.10.3/lib/gitlab/ci/jwt.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.10.3/app/controllers/jwt_controller.rb
-* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/-/jwks) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v15.10.3/config/routes.rb#L215-217
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.0.1/app/models/ci/build.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.0.1/lib/gitlab/ci/jwt.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.0.1/app/controllers/jwt_controller.rb
+* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/-/jwks) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.0.1/config/routes.rb#L213-215
