@@ -26,7 +26,7 @@ func main() {
 	}
 	ciJobJWT := getEnv(os.Args[1])
 	ciServerURL := getEnv("CI_SERVER_URL")
-	jwksURL := fmt.Sprintf("%s/-/jwks", ciServerURL)
+	jwksURL := fmt.Sprintf("%s/oauth/discovery/keys", ciServerURL)
 	boundIssuer := getEnv("CI_SERVER_HOST")
 
 	// fetch the gitlab jwt key set.
