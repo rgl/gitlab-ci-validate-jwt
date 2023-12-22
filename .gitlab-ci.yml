@@ -3,7 +3,7 @@ info:
   tags:
     - ubuntu
     - docker
-  image: golang:1.20.4-bullseye
+  image: golang:1.21.5-bookworm
   id_tokens:
     EXAMPLE_ID_TOKEN:
       aud: https://example.com
