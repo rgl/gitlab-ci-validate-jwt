@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/lestrrat-go/jwx/jwk"
-	"github.com/lestrrat-go/jwx/jwt"
+	"github.com/lestrrat-go/jwx/v2/jwk"
+	"github.com/lestrrat-go/jwx/v2/jwt"
 )
 
 func getEnv(name string) string {
@@ -27,7 +27,7 @@ func main() {
 	ciJobJWT := getEnv(os.Args[1])
 	ciServerURL := getEnv("CI_SERVER_URL")
 	jwksURL := fmt.Sprintf("%s/oauth/discovery/keys", ciServerURL)
-	boundIssuer := getEnv("CI_SERVER_HOST")
+	boundIssuer := ciServerURL
 
 	// fetch the gitlab jwt key set.
 	//
