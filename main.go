@@ -28,6 +28,7 @@ func main() {
 	ciServerURL := getEnv("CI_SERVER_URL")
 	jwksURL := fmt.Sprintf("%s/oauth/discovery/keys", ciServerURL)
 	boundIssuer := ciServerURL
+	boundAudience := "https://example.com"
 
 	// fetch the gitlab jwt key set.
 	//
@@ -105,7 +106,7 @@ func main() {
 	//   				base64UrlEncode(header) + "." + base64UrlEncode(payload),
 	//					gitLabJwtKeySet.getKey(header.kid))
 	log.Println("Validating GitLab CI job JWT...")
-	token, err := jwt.ParseString(ciJobJWT, jwt.WithIssuer(boundIssuer), jwt.WithKeySet(keySet))
+	token, err := jwt.ParseString(ciJobJWT, jwt.WithAudience(boundAudience), jwt.WithIssuer(boundIssuer), jwt.WithKeySet(keySet))
 	if err != nil {
 		log.Fatalf("failed to validate the jwt: %v", err)
 	}
