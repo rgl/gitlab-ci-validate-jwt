@@ -79,9 +79,9 @@ To see how all of this can be done read the [main.go](main.go) file.
 ## Reference
 
 * https://docs.gitlab.com/ce/ci/examples/authenticating-with-hashicorp-vault/
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.7.0/app/models/ci/build.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.7.0/lib/gitlab/ci/jwt.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.7.0/lib/gitlab/ci/jwt_v2.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.7.0/app/controllers/jwt_controller.rb
-* https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.7.0/app/controllers/jwks_controller.rb
-* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/oauth/discovery/keys) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v16.7.0/config/routes.rb#L43
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v17.4.1/app/models/ci/build.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v17.4.1/lib/gitlab/ci/jwt.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v17.4.1/lib/gitlab/ci/jwt_v2.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v17.4.1/app/controllers/jwt_controller.rb
+* https://gitlab.com/gitlab-org/gitlab-foss/blob/v17.4.1/app/controllers/jwks_controller.rb
+* JWKS (JSON Web Key Set) endpoint (e.g. https://gitlab.example.com/oauth/discovery/keys) at https://gitlab.com/gitlab-org/gitlab-foss/blob/v17.4.1/config/routes.rb#L43
