@@ -1,6 +1,6 @@
 This validates a GitLab CI ID Token JWT using the keys available at its jwks endpoint.
 
-A GitLab CI ID Token JWT is a private string that can be used to authenticate a particular CI job in 3rd party services (like HashiCorp Vault).
+A GitLab CI ID Token JWT is a secret string that can be used to authenticate a particular CI job in 3rd party services (like HashiCorp Vault).
 
 Its available in a CI job as a [custom environment variable defined in the job `id_tokens` property](https://docs.gitlab.com/ee/ci/secrets/id_token_authentication.html), as, e.g.:
 
