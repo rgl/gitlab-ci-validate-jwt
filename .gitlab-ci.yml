@@ -20,7 +20,7 @@ info:
       echo $EXAMPLE_ID_TOKEN | tr '.' '\n'
     # validate the example gitlab ci job id token jwt that is in the
     # EXAMPLE_ID_TOKEN environment variable against the
-    # gitlab jwks endpoint at $CI_SERVER_URL/-/jwks.
+    # gitlab jwks endpoint at $CI_SERVER_URL/oauth/discovery/keys.
     - |
       SSL_CERT_FILE=$CI_SERVER_TLS_CA_FILE \
         ./gitlab-ci-validate-jwt EXAMPLE_ID_TOKEN
