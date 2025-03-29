@@ -3,7 +3,7 @@ info:
   tags:
     - ubuntu
     - docker
-  image: golang:1.24.0-bookworm
+  image: golang:1.24.1-bookworm
   id_tokens:
     EXAMPLE_ID_TOKEN:
       aud: https://example.com
