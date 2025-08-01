@@ -6,10 +6,10 @@ import (
 	"log"
 	"os"
 	"sort"
-	"strings"
+	"time"
 
-	"github.com/lestrrat-go/jwx/v2/jwk"
-	"github.com/lestrrat-go/jwx/v2/jwt"
+	"github.com/lestrrat-go/jwx/v3/jwk"
+	"github.com/lestrrat-go/jwx/v3/jwt"
 )
 
 func getEnv(name string) string {
@@ -110,22 +110,35 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to validate the jwt: %v", err)
 	}
-	privateClaims := token.PrivateClaims()
 
-	log.Printf("jwt is valid for project %s", privateClaims["project_path"])
+	var projectPath string
+	if err = token.Get("project_path", &projectPath); err != nil {
+		log.Fatalf("failed to get the project_path claim from the jwt: %v", err)
+	}
+	log.Printf("jwt is valid for project %s", projectPath)
 
 	// dump the jwt claims (sorted by claim name).
-	claims := make([]string, 0, len(privateClaims)+7)
-	claims = append(claims,
-		fmt.Sprintf("jti=%s", token.JwtID()),
-		fmt.Sprintf("iss=%s", token.Issuer()),
-		fmt.Sprintf("iat=%s", token.IssuedAt().Format("2006-01-02T15:04:05-0700")),
-		fmt.Sprintf("nbf=%s", token.NotBefore().Format("2006-01-02T15:04:05-0700")),
-		fmt.Sprintf("exp=%s", token.Expiration().Format("2006-01-02T15:04:05-0700")),
-		fmt.Sprintf("sub=%s", token.Subject()),
-		fmt.Sprintf("aud=%s", strings.Join(token.Audience(), ",")))
-	for k := range privateClaims {
-		claims = append(claims, fmt.Sprintf("%s=%v", k, privateClaims[k]))
+	claims := make([]string, 0, len(token.Keys()))
+	for _, k := range token.Keys() {
+		var v any
+		if err = token.Get(k, &v); err != nil {
+			log.Fatalf("failed to get the %s claim from the jwt: %v", k, err)
+		}
+		switch v := v.(type) {
+		case string:
+			claims = append(claims, fmt.Sprintf("%s=%s", k, v))
+		case []string:
+			for _, v := range v {
+				claims = append(claims, fmt.Sprintf("%s=%s", k, v))
+			}
+		case time.Time:
+			claims = append(claims, fmt.Sprintf("%s=%s", k, v.Format("2006-01-02T15:04:05-0700")))
+		case float64:
+			claims = append(claims, fmt.Sprintf("%s=%v", k, v))
+		default:
+			log.Printf("WARNING: skipping the %s claim with type %T value %v", k, v, v)
+			continue
+		}
 	}
 	sort.Strings(claims)
 	for _, claim := range claims {
